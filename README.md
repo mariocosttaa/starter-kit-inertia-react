@@ -51,42 +51,64 @@ A modern SaaS starter kit built with Laravel, React, TypeScript, and Inertia.js.
 ## 🚀 Quick Start
 
 1. Clone the repository
+
 ```bash
-git clone [repository-url]
+git clone https://github.com/mariocosttaa/starter-kit-inertia-react
 ```
 
-2. Start Docker containers
+2. Build and start Docker containers
+
 ```bash
+# Build the containers
+docker-compose build
+
+# Start the containers
 ./vendor/bin/sail up -d
 ```
 
 3. Install dependencies
+
 ```bash
 composer install
 npm install
 ```
 
 4. Set up environment
+
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
 5. Run migrations
+
 ```bash
+# First, run the manager database migrations
+php artisan migrate --path=database/migrations/manager
+
+# Then run the remaining migrations
 php artisan migrate
 ```
 
 6. Start development server
+
 ```bash
 npm run dev
 ```
 
-7. Start SSR server (optional)
+7. Build SSR assets
+
 ```bash
 npm run build:ssr
+```
+
+8. Start SSR server
+
+```bash
 sail artisan inertia:start-ssr
 ```
+
+Note: The SSR server will run on port 13714 by default. Make sure this port is available.
 
 ## 🏢 Multi-tenancy
 
