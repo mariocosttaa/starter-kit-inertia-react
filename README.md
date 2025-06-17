@@ -15,12 +15,15 @@
 
 ## 📋 Overview
 
-A modern SaaS starter kit built with Laravel, React, TypeScript, and Inertia.js. This starter kit provides a robust foundation for building scalable and maintainable SaaS applications.
+A modern SaaS starter kit built with Laravel, React, TypeScript, and Inertia.js. This starter kit provides a robust foundation for building scalable and maintainable SaaS applications with advanced features like Server-Side Rendering (SSR) and Multi-tenancy support.
 
 ### ✨ Key Features
 
 - 🔐 **Authentication & Authorization**
 - 👥 **Multi-tenancy Support**
+  - Single database with tenant-specific table prefixes
+  - Data isolation through table prefixes
+  - Easy tenant management
 - 🎨 **Modern UI with Tailwind CSS**
 - 📱 **Responsive Design**
 - 🔄 **Real-time Updates**
@@ -29,6 +32,10 @@ A modern SaaS starter kit built with Laravel, React, TypeScript, and Inertia.js.
 - 📝 **Rich Text Editing**
 - 📤 **File Upload & Management**
 - 🔔 **Notification System**
+- 🌐 **Server-Side Rendering (SSR)**
+  - Improved SEO
+  - Faster initial page load
+  - Better user experience
 
 ### 🛠️ Tech Stack
 
@@ -39,6 +46,7 @@ A modern SaaS starter kit built with Laravel, React, TypeScript, and Inertia.js.
 - **Development**: Docker + Laravel Sail
 - **Database**: MySQL
 - **Testing**: PHPUnit + Jest
+- **SSR**: Inertia SSR
 
 ## 🚀 Quick Start
 
@@ -74,6 +82,86 @@ php artisan migrate
 npm run dev
 ```
 
+7. Start SSR server (optional)
+```bash
+npm run build:ssr
+sail artisan inertia:start-ssr
+```
+
+## 🏢 Multi-tenancy
+
+This starter kit includes a powerful multi-tenancy system that uses a single database with tenant-specific table prefixes for data isolation. Each tenant's tables are prefixed with their unique identifier, ensuring data separation while maintaining database simplicity.
+
+### Key Benefits
+- Single database management
+- Efficient data isolation through table prefixes
+- Simplified backup and maintenance
+- Easy tenant data management
+
+### Creating a New Tenant
+
+```php
+use App\Actions\Tenancy\TenancyAction;
+
+// Create a new tenant
+$tenant = TenancyAction::set($userId, [
+    'name' => 'Tenant Name',
+    'slug' => 'tenant-slug'
+]);
+```
+
+### Managing Tenant Tables
+
+```bash
+# Create tenant table structure
+php artisan make:tenancyDb {tenancyId}
+
+# Destroy tenant table structure
+php artisan destroy:tenancyDb {tenancyId}
+```
+
+### Creating Tenant-Specific Tables
+
+```php
+namespace Database\Migrations\Tenancy;
+
+class CreateNotificationTable extends _TenancyHelperMigration
+{
+    public function up(): void
+    {
+        // Tables are automatically prefixed with tenant ID
+        // Example: 100001_notifications, 100002_notifications, etc.
+        Schema::connection($this->connection)->create($this->prefix.'_notifications', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('subject');
+            $table->text('message');
+            $table->timestamps();
+        });
+    }
+}
+```
+
+## 🌐 Server-Side Rendering (SSR)
+
+The kit includes built-in SSR support through Inertia.js:
+
+1. Build SSR assets:
+```bash
+npm run build:ssr
+```
+
+2. Start SSR server:
+```bash
+sail artisan inertia:start-ssr
+```
+
+Benefits:
+- Improved SEO
+- Faster initial page load
+- Better user experience
+- Reduced client-side JavaScript
+
 ## 📚 Documentation
 
 Choose your preferred language to view the complete documentation:
@@ -92,5 +180,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-Made with ❤️ by [Your Name/Organization]
+Made with ❤️ by Mário Costa
 </div>

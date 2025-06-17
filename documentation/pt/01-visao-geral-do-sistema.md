@@ -7,16 +7,17 @@
 - [Principais Funcionalidades](#principais-funcionalidades)
 
 ## Introdução
-Esta documentação fornece uma visão abrangente do nosso Laravel Inertia React TypeScript SaaS Starter Kit. O sistema foi projetado para fornecer uma base robusta para a construção de aplicações SaaS modernas, com foco em escalabilidade, manutenibilidade e experiência do desenvolvedor.
+Um kit inicial SaaS moderno construído com Laravel, React, TypeScript e Inertia.js. Este kit inicial fornece uma base robusta para construir aplicações SaaS escaláveis e de fácil manutenção, com recursos avançados como Server-Side Rendering (SSR) e suporte a Multi-tenancy.
 
 ## Stack Tecnológica
 - **Backend**: Laravel 10.x
 - **Frontend**: React + TypeScript
 - **Gerenciamento de Estado**: Inertia.js
 - **Estilização**: Tailwind CSS
-- **Ambiente de Desenvolvimento**: Docker + Laravel Sail
+- **Desenvolvimento**: Docker + Laravel Sail
 - **Banco de Dados**: MySQL
 - **Testes**: PHPUnit + Jest
+- **SSR**: Inertia SSR
 
 ## Arquitetura
 O sistema segue um padrão de arquitetura moderno, combinando o melhor das capacidades do backend do Laravel com o poder do frontend do React:
@@ -36,16 +37,23 @@ O sistema segue um padrão de arquitetura moderno, combinando o melhor das capac
 - **Tailwind CSS**: Framework CSS utilitário para estilização
 
 ## Principais Funcionalidades
-1. 🔐 Autenticação e Autorização
-2. 👥 Suporte a Multi-tenancy
-3. 🎨 Interface Moderna com Tailwind CSS
-4. 📱 Design Responsivo
-5. 🔄 Atualizações em Tempo Real
-6. 📊 Análises no Dashboard
-7. 🔍 Funcionalidade de Busca
-8. 📝 Editor de Texto Rico
-9. 📤 Upload e Gerenciamento de Arquivos
-10. 🔔 Sistema de Notificações
+1. 🔐 **Autenticação e Autorização**
+2. 👥 **Suporte a Multi-tenancy**
+   - Banco de dados único com prefixos específicos por tenant
+   - Isolamento de dados através de prefixos de tabela
+   - Gerenciamento fácil de tenants
+3. 🎨 **UI Moderna com Tailwind CSS**
+4. 📱 **Design Responsivo**
+5. 🔄 **Atualizações em Tempo Real**
+6. 📊 **Analytics no Dashboard**
+7. 🔍 **Funcionalidade de Busca**
+8. 📝 **Editor de Texto Rico**
+9. 📤 **Upload e Gerenciamento de Arquivos**
+10. 🔔 **Sistema de Notificações**
+11. 🌐 **Server-Side Rendering (SSR)**
+   - SEO melhorado
+   - Carregamento inicial mais rápido
+   - Melhor experiência do usuário
 
 ## Fluxo de Desenvolvimento
 1. Desenvolvimento local usando Docker + Laravel Sail
@@ -72,3 +80,53 @@ Para iniciar o desenvolvimento:
 - Manter componentes pequenos e focados
 - Usar tratamento de erros adequado
 - Implementar logging apropriado
+
+## Início Rápido
+1. Clone o repositório
+```bash
+git clone https://github.com/mariocosttaa/starter-kit-inertia-react.git
+cd starter-kit-inertia-react
+```
+
+2. Inicie os containers Docker
+```bash
+./vendor/bin/sail up -d
+```
+
+3. Instale as dependências
+```bash
+composer install
+npm install
+```
+
+4. Configure o ambiente
+```bash
+cp .env.example .env
+./vendor/bin/sail artisan key:generate
+```
+
+5. Execute as migrações
+```bash
+./vendor/bin/sail artisan migrate
+```
+
+6. Inicie o servidor de desenvolvimento
+```bash
+npm run dev
+```
+
+7. Inicie o servidor SSR (opcional)
+```bash
+npm run build:ssr
+./vendor/bin/sail artisan inertia:start-ssr
+```
+
+## Estrutura da Documentação
+- [Visão Geral do Sistema](01-visao-geral-do-sistema.md)
+- [Guia de Instalação](02-guia-de-instalacao.md)
+- [Sistema Multi-tenancy](03-multi-tenancy.md)
+- [Server-Side Rendering](04-guia-ssr.md)
+- [Desenvolvimento Frontend](05-guia-frontend.md)
+- [Desenvolvimento Backend](06-guia-backend.md)
+- [Testes](07-guia-de-testes.md)
+- [Deploy](08-guia-de-deploy.md)

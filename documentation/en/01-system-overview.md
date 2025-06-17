@@ -1,74 +1,83 @@
-# 🚀 System Overview
-
-## 📋 Table of Contents
-- [Introduction](#introduction)
-- [Technology Stack](#technology-stack)
-- [Architecture](#architecture)
-- [Key Features](#key-features)
+# System Overview
 
 ## Introduction
-This documentation provides a comprehensive overview of our Laravel Inertia React TypeScript SaaS Starter Kit. The system is designed to provide a robust foundation for building modern SaaS applications with a focus on scalability, maintainability, and developer experience.
+A modern SaaS starter kit built with Laravel, React, TypeScript, and Inertia.js. This starter kit provides a robust foundation for building scalable and maintainable SaaS applications with advanced features like Server-Side Rendering (SSR) and Multi-tenancy support.
 
-## Technology Stack
+## Tech Stack
 - **Backend**: Laravel 10.x
 - **Frontend**: React + TypeScript
 - **State Management**: Inertia.js
 - **Styling**: Tailwind CSS
-- **Development Environment**: Docker + Laravel Sail
+- **Development**: Docker + Laravel Sail
 - **Database**: MySQL
 - **Testing**: PHPUnit + Jest
-
-## Architecture
-The system follows a modern architecture pattern combining the best of Laravel's backend capabilities with React's frontend power:
-
-### Backend Architecture
-- **Laravel Framework**: Provides the core backend functionality
-- **Controllers**: Handle HTTP requests and business logic
-- **Models**: Represent database entities and relationships
-- **Migrations**: Define database schema and structure
-- **Middleware**: Handle request filtering and authentication
-- **Services**: Contain business logic and complex operations
-
-### Frontend Architecture
-- **React Components**: Built with TypeScript for type safety
-- **Inertia.js**: Bridges Laravel and React seamlessly
-- **TypeScript**: Provides type safety and better developer experience
-- **Tailwind CSS**: Utility-first CSS framework for styling
+- **SSR**: Inertia SSR
 
 ## Key Features
-1. 🔐 Authentication & Authorization
-2. 👥 Multi-tenancy Support
-3. 🎨 Modern UI with Tailwind CSS
-4. 📱 Responsive Design
-5. 🔄 Real-time Updates
-6. 📊 Dashboard Analytics
-7. 🔍 Search Functionality
-8. 📝 Rich Text Editing
-9. 📤 File Upload & Management
-10. 🔔 Notification System
+- 🔐 **Authentication & Authorization**
+- 👥 **Multi-tenancy Support**
+  - Single database with tenant-specific table prefixes
+  - Data isolation through table prefixes
+  - Easy tenant management
+- 🎨 **Modern UI with Tailwind CSS**
+- 📱 **Responsive Design**
+- 🔄 **Real-time Updates**
+- 📊 **Dashboard Analytics**
+- 🔍 **Search Functionality**
+- 📝 **Rich Text Editing**
+- 📤 **File Upload & Management**
+- 🔔 **Notification System**
+- 🌐 **Server-Side Rendering (SSR)**
+  - Improved SEO
+  - Faster initial page load
+  - Better user experience
 
-## Development Workflow
-1. Local development using Docker + Laravel Sail
-2. Git-based version control
-3. Automated testing with PHPUnit and Jest
-4. CI/CD pipeline integration
-5. Code quality tools (ESLint, Prettier)
-
-## Getting Started
-To start development:
+## Quick Start
 1. Clone the repository
-2. Run `./vendor/bin/sail up -d`
-3. Install dependencies with `composer install` and `npm install`
-4. Set up environment variables
-5. Run migrations
-6. Start the development server
+```bash
+git clone https://github.com/mariocosttaa/starter-kit-inertia-react.git
+cd starter-kit-inertia-react
+```
 
-## Best Practices
-- Follow PSR-12 coding standards
-- Write tests for new features
-- Use TypeScript for all frontend code
-- Document API endpoints
-- Follow Git flow branching strategy
-- Keep components small and focused
-- Use proper error handling
-- Implement proper logging
+2. Start Docker containers
+```bash
+./vendor/bin/sail up -d
+```
+
+3. Install dependencies
+```bash
+composer install
+npm install
+```
+
+4. Set up environment
+```bash
+cp .env.example .env
+./vendor/bin/sail artisan key:generate
+```
+
+5. Run migrations
+```bash
+./vendor/bin/sail artisan migrate
+```
+
+6. Start development server
+```bash
+npm run dev
+```
+
+7. Start SSR server (optional)
+```bash
+npm run build:ssr
+./vendor/bin/sail artisan inertia:start-ssr
+```
+
+## Documentation Structure
+- [System Overview](01-system-overview.md)
+- [Installation Guide](02-installation-guide.md)
+- [Multi-tenancy System](03-multi-tenancy.md)
+- [Server-Side Rendering](04-ssr-guide.md)
+- [Frontend Development](05-frontend-guide.md)
+- [Backend Development](06-backend-guide.md)
+- [Testing](07-testing-guide.md)
+- [Deployment](08-deployment-guide.md)
