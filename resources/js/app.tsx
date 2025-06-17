@@ -5,7 +5,7 @@ import './shared/lang/i18n';
 import { CurrencyProvider } from './shared/context/CurrencyContext';
 import { ToastProvider } from './shared/components/ToastProvider';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME;
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

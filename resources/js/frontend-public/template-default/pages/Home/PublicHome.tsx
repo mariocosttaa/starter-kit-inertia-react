@@ -7,9 +7,9 @@ export default function PublicHome() {
     return (
         <>
             <PortalLayout
-                pageTittle="Home Page"
+                pageTitle="Home Page"
                 activePage="home"
-                tittle="Home"
+                title="Home"
                 subtitle={__('Home Page')}
                 breadcrumbs={[
                     { label: 'Website', href: '/' },
