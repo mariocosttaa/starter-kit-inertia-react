@@ -256,5 +256,7 @@ switch ($event->type) {
 ## Próximos Passos
 - [Desenvolvimento Frontend](05-frontend.md)
 - [Desenvolvimento Backend](06-backend.md)
-- [Testes](08-testes.md)
-- [Deploy](09-deploy.md) 
+- [Visão Geral do Sistema](01-visao-geral-do-sistema.md)
+- [Guia de Instalação](02-instalacao.md)
+- [Multi-tenancy](03-multi-tenancy.md)
+- [Guia SSR](04-ssr.md) 

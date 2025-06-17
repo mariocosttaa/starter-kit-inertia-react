@@ -1,5 +1,7 @@
 # System Overview
 
+[English](#system-overview) | [Português](../pt/01-visao-geral-do-sistema.md)
+
 ## Introduction
 A modern SaaS starter kit built with Laravel, React, TypeScript, and Inertia.js. This starter kit provides a robust foundation for building scalable and maintainable SaaS applications with advanced features like Server-Side Rendering (SSR) and Multi-tenancy support.
 
@@ -74,10 +76,18 @@ npm run build:ssr
 
 ## Documentation Structure
 - [System Overview](01-system-overview.md)
-- [Installation Guide](02-installation-guide.md)
-- [Multi-tenancy System](03-multi-tenancy.md)
-- [Server-Side Rendering](04-ssr-guide.md)
-- [Frontend Development](05-frontend-guide.md)
-- [Backend Development](06-backend-guide.md)
-- [Testing](07-testing-guide.md)
-- [Deployment](08-deployment-guide.md)
+- [Installation Guide](02-installation.md)
+- [Multi-tenancy](03-multi-tenancy.md)
+- [Server-Side Rendering](04-ssr.md)
+- [Frontend Development](05-frontend.md)
+- [Backend Development](06-backend.md)
+- [Best Practices](07-best-practices.md)
+
+## Next Steps
+- [System Overview](01-system-overview.md)
+- [Installation Guide](02-installation.md)
+- [Multi-tenancy](03-multi-tenancy.md)
+- [Server-Side Rendering](04-ssr.md)
+- [Frontend Development](05-frontend.md)
+- [Backend Development](06-backend.md)
+- [Best Practices](07-best-practices.md)

@@ -1,5 +1,7 @@
 # 🚀 Visão Geral do Sistema
 
+[English](../en/01-system-overview.md) | [Português](#visão-geral-do-sistema)
+
 ## 📋 Índice
 - [Introdução](#introdução)
 - [Stack Tecnológica](#stack-tecnológica)
@@ -123,10 +125,19 @@ npm run build:ssr
 
 ## Estrutura da Documentação
 - [Visão Geral do Sistema](01-visao-geral-do-sistema.md)
-- [Guia de Instalação](02-guia-de-instalacao.md)
-- [Sistema Multi-tenancy](03-multi-tenancy.md)
-- [Server-Side Rendering](04-guia-ssr.md)
-- [Desenvolvimento Frontend](05-guia-frontend.md)
-- [Desenvolvimento Backend](06-guia-backend.md)
+- [Guia de Instalação](02-instalacao.md)
+- [Multi-tenancy](03-multi-tenancy.md)
+- [Renderização do Lado do Servidor](04-ssr.md)
+- [Desenvolvimento Frontend](05-frontend.md)
+- [Desenvolvimento Backend](06-backend.md)
 - [Testes](07-guia-de-testes.md)
 - [Deploy](08-guia-de-deploy.md)
+
+## Próximos Passos
+- [Visão Geral do Sistema](01-visao-geral-do-sistema.md)
+- [Guia de Instalação](02-instalacao.md)
+- [Multi-tenancy](03-multi-tenancy.md)
+- [Renderização do Lado do Servidor](04-ssr.md)
+- [Desenvolvimento Frontend](05-frontend.md)
+- [Desenvolvimento Backend](06-backend.md)
+- [Melhores Práticas](07-melhores-praticas.md)
