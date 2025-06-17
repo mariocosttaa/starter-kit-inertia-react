@@ -1,128 +1,143 @@
-# Multi-tenancy System
+# Multi-tenancy Guide
+
+[English](#multi-tenancy-guide) | [Português](../pt/03-multi-tenancy.md)
+
+## Quick Navigation
+- [Overview](#overview)
+- [Getting Started](#getting-started)
+- [Creating Tenants](#creating-tenants)
+- [Managing Tenant Data](#managing-tenant-data)
+- [Best Practices](#best-practices)
+- [Troubleshooting](#troubleshooting)
 
 ## Overview
-The multi-tenancy system in this starter kit uses a single database with tenant-specific table prefixes for data isolation. Each tenant's tables are prefixed with their unique identifier, ensuring data separation while maintaining database simplicity.
 
-## Key Features
-- Single database management
-- Efficient data isolation through table prefixes
-- Simplified backup and maintenance
-- Easy tenant data management
+Multi-tenancy in this application is implemented using a single database with tenant-specific table prefixes. This approach provides:
 
-## Creating a New Tenant
+- Efficient data isolation
+- Easy tenant management
+- Scalable architecture
+- Simple backup and restore processes
 
-```php
-use App\Actions\Tenancy\TenancyAction;
+## Getting Started
 
-// Create a new tenant
-$tenant = TenancyAction::set($userId, [
-    'name' => 'Tenant Name',
-    'slug' => 'tenant-slug'
-]);
-```
+### Prerequisites
+- Laravel Sail installed
+- Database configured
+- Basic understanding of Laravel migrations
 
-## Managing Tenant Tables
-
-### Creating Tenant Structure
+### Initial Setup
+1. Run the base migrations:
 ```bash
-./vendor/bin/sail artisan make:tenancyDb {tenancyId}
+./vendor/bin/sail artisan migrate
 ```
 
-### Destroying Tenant Structure
+2. Create your first tenant:
 ```bash
-./vendor/bin/sail artisan destroy:tenancyDb {tenancyId}
+./vendor/bin/sail artisan tenant:create "My First Tenant"
 ```
 
-## Creating Tenant-Specific Tables
+## Creating Tenants
 
-### Migration Example
-```php
-namespace Database\Migrations\Tenancy;
+### Using the Command Line
+```bash
+# Create a new tenant
+./vendor/bin/sail artisan tenant:create "Tenant Name"
 
-class CreateNotificationTable extends _TenancyHelperMigration
+# List all tenants
+./vendor/bin/sail artisan tenant:list
+
+# Delete a tenant
+./vendor/bin/sail artisan tenant:delete "Tenant Name"
+```
+
+### Using the API
+```bash
+# Create tenant
+POST /api/tenants
 {
-    public function up(): void
-    {
-        // Tables are automatically prefixed with tenant ID
-        // Example: 100001_notifications, 100002_notifications, etc.
-        Schema::connection($this->connection)->create($this->prefix.'_notifications', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('subject');
-            $table->text('message');
-            $table->timestamps();
-        });
-    }
+    "name": "Tenant Name",
+    "domain": "tenant.example.com"
+}
+
+# Get tenant details
+GET /api/tenants/{tenant_id}
+
+# Update tenant
+PUT /api/tenants/{tenant_id}
+{
+    "name": "Updated Name"
 }
 ```
 
-## Tenant Database Structure
+## Managing Tenant Data
 
-### Base Tables
-- `tenancies`: Stores tenant information
-- `user_tenancies`: Links users to tenants
+### Creating Tenant-Specific Tables
+1. Create a new migration:
+```bash
+./vendor/bin/sail artisan make:migration create_tenant_specific_table
+```
 
-### Tenant-Specific Tables
-Each tenant gets their own set of tables with their ID as prefix:
-- `{tenant_id}_notifications`
-- `{tenant_id}_users`
-- `{tenant_id}_settings`
-- etc.
+2. Use the tenant prefix in your migration:
+```php
+Schema::create('tenant_' . $tenantId . '_table_name', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->timestamps();
+});
+```
+
+### Accessing Tenant Data
+- Use the `TenantScope` trait in your models
+- Access tenant-specific data through the tenant context
+- Use the tenant middleware for automatic context switching
 
 ## Best Practices
 
-### Creating New Tenant Tables
-1. Create a new migration in `database/migrations/tenancy/`
-2. Extend `_TenancyHelperMigration`
-3. Use `$this->prefix` for table names
-4. Use `$this->connection` for database connection
+### Data Isolation
+- Always use tenant-specific table prefixes
+- Implement proper access controls
+- Use middleware for tenant context
+- Validate tenant ownership
 
-### Managing Tenant Data
-1. Always use the tenant context
-2. Validate tenant access
-3. Use proper indexing for tenant-specific queries
-4. Implement proper error handling
+### Performance
+- Index tenant-specific columns
+- Use appropriate caching strategies
+- Implement efficient queries
+- Monitor tenant resource usage
 
-## Security Considerations
-- Validate tenant access in middleware
-- Use proper authorization checks
-- Implement tenant isolation in queries
-- Handle tenant-specific errors appropriately
-
-## Common Tasks
-
-### Adding a New Tenant
-```php
-// Create tenant
-$tenant = TenancyAction::set($userId, [
-    'name' => 'New Tenant',
-    'slug' => 'new-tenant'
-]);
-
-// Create tenant structure
-./vendor/bin/sail artisan make:tenancyDb {$tenant->id}
-```
-
-### Removing a Tenant
-```php
-// Destroy tenant structure
-./vendor/bin/sail artisan destroy:tenancyDb {$tenant->id}
-
-// Delete tenant
-$tenant->delete();
-```
+### Security
+- Validate tenant access
+- Implement proper authentication
+- Use secure data encryption
+- Regular security audits
 
 ## Troubleshooting
 
 ### Common Issues
-1. **Table Prefix Issues**
-   - Ensure using `$this->prefix` in migrations
-   - Check connection settings
 
-2. **Tenant Access Issues**
-   - Verify tenant middleware
-   - Check user-tenant relationships
+1. **Tenant Not Found**
+   - Check tenant existence
+   - Verify tenant ID
+   - Check database connection
+
+2. **Data Access Issues**
+   - Verify tenant context
+   - Check permissions
+   - Validate table prefixes
 
 3. **Migration Problems**
-   - Ensure proper migration order
-   - Check tenant ID validity 
+   - Check migration status
+   - Verify tenant existence
+   - Review migration files
+
+### Getting Help
+- Check the logs in `storage/logs`
+- Review tenant-specific logs
+- Contact support with tenant ID
+
+## Next Steps
+- [Frontend Development](05-frontend.md)
+- [Backend Development](06-backend.md)
+- [Testing](07-testing.md)
+- [Deployment](08-deployment.md)
