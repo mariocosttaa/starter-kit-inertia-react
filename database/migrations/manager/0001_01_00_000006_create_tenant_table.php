@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tenancys', function (Blueprint $table) {
+        Schema::create('tenant', function (Blueprint $table) {
             $table->id()->startingValue(10000);
             $table->string('name');
             $table->string('slug')->unique()->index();
@@ -24,7 +24,7 @@ return new class extends Migration
                 ->constrained('users')
                 ->onDelete('cascade')
                 ->index()
-                ->name('tenancys_user_id_foreign');
+                ->name('tenants_user_id_foreign');
 
 
             $table->boolean('status')->default(true);

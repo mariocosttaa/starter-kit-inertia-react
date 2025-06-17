@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
-class TenancyModel extends Model
+class TenantModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'tenancys';
+    protected $table = 'tenants';
 
     protected $fillable = [
         'name',
