@@ -6,14 +6,19 @@ interface LoadingOverlayProps {
     isVisible: boolean;
 }
 
+const isBrowser = typeof window !== 'undefined';
+
 const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ isVisible }) => {
     const [isDarkMode, toggleDarkMode] = useDarkMode();
     const frontend = useFrontend();
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        if (typeof window === 'undefined') return;
+        setMounted(true);
     }, []);
 
+    // Don't render anything during SSR
+    if (!isBrowser || !mounted) return null;
     if (!isVisible) return null;
 
     return (

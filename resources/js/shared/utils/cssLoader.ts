@@ -1,8 +1,23 @@
 import { cssConfig } from '../config/cssConfig';
-import { useFrontend } from '../hooks/useFrontend';
 
 export function determineCSSByUrl(url: string): string[] {
-    const frontend =  useFrontend( url );
+    let pathSegments;
+    try {
+        pathSegments = new URL(url).pathname.split('/');
+    } catch (error) {
+        pathSegments = url.split('/');
+    }
+
+    let frontend: 'public' | 'private' | 'portal' | 'landing' = 'public';
+
+    if (pathSegments[2] === 'portal') {
+        frontend = 'portal';
+    } else if (pathSegments[2] === 'business') {
+        frontend = 'landing';
+    } else if (pathSegments[2] === 'dashboard') {
+        frontend = 'private';
+    }
+
     return cssConfig[frontend] || [];
 }
 

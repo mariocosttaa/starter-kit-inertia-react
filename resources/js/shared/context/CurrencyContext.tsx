@@ -14,26 +14,29 @@ interface CurrencyProviderProps {
     children: React.ReactNode;
 }
 
-export function CurrencyProvider({ children }: CurrencyProviderProps) {
-    // Get page props safely
-    let defaultCurrency = '';
+const isBrowser = typeof window !== 'undefined';
 
-    try {
-        const pageProps = usePage<SharedData>().props;
-        defaultCurrency = pageProps.default_currency;
-    } catch (error) {
-        // If we can't get page props, we'll rely on cookies only
-        console.warn('CurrencyProvider: Could not access page props, falling back to cookies');
+export function CurrencyProvider({ children }: CurrencyProviderProps) {
+    // Get page props safely (only on client)
+    let defaultCurrency = '';
+    if (isBrowser) {
+        try {
+            const pageProps = usePage<SharedData>().props;
+            defaultCurrency = pageProps.default_currency;
+        } catch (error) {
+            // If we can't get page props, we'll rely on cookies only
+            console.warn('CurrencyProvider: Could not access page props, falling back to cookies');
+        }
     }
 
-    // Initialize with cookies first, then fallback to props
+    // Initialize with cookies first (client), then fallback to props, else empty string
     const [currentCurrencyCode, setCurrentCurrencyCode] = useState<string>(
-        getCurrencyCookie() || defaultCurrency
+        isBrowser ? (getCurrencyCookie() || defaultCurrency) : ''
     );
 
-
-    // Sync cookies with state
+    // Sync cookies with state (client only)
     useEffect(() => {
+        if (!isBrowser) return;
         if (!getCurrencyCookie()) {
             setCurrencyCookie(currentCurrencyCode);
         }
@@ -41,7 +44,7 @@ export function CurrencyProvider({ children }: CurrencyProviderProps) {
 
     const updateCurrency = (code: string) => {
         setCurrentCurrencyCode(code);
-        setCurrencyCookie(code);
+        if (isBrowser) setCurrencyCookie(code);
     };
 
     return (
