@@ -1,0 +1,17 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["react", "@typescript-eslint"],
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "never", "afterOpening": "never", "beforeClosing": "never" }]
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
+  }

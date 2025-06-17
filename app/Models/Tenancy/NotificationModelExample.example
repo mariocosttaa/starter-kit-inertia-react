@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Models\Tenancy;
+
+use App\Models\Manager\UserModel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class NotificationModelExample extends _TenancyModelHelper
+{
+    use HasFactory;
+
+    protected $connection = 'tenancies';
+    protected $table = 'notifications_example';
+    protected $baseTable = 'notifications_example';
+
+    protected $fillable = [
+        'user_id',
+        'subject',
+        'message',
+        'type'
+    ];
+
+    protected $casts = [
+        'type' => 'string'
+    ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(UserModel::class);
+    }
+}
