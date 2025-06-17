@@ -84,10 +84,10 @@ php artisan key:generate
 
 ```bash
 # First, run the manager database migrations
-php artisan migrate --path=database/migrations/manager
+./vendor/bin/sail artisan migrate --path=database/migrations/manager
 
 # Then run the remaining migrations
-php artisan migrate
+./vendor/bin/sail artisan migrate
 ```
 
 6. Start development server
@@ -105,7 +105,7 @@ npm run build:ssr
 8. Start SSR server
 
 ```bash
-sail artisan inertia:start-ssr
+./vendor/bin/sail artisan inertia:start-ssr
 ```
 
 Note: The SSR server will run on port 13714 by default. Make sure this port is available.
@@ -175,7 +175,7 @@ npm run build:ssr
 
 2. Start SSR server:
 ```bash
-sail artisan inertia:start-ssr
+./vendor/bin/sail artisan inertia:start-ssr
 ```
 
 Benefits:
