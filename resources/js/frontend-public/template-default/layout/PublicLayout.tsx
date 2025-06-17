@@ -23,7 +23,7 @@ export default function PortalLayout({ pageTittle, activePage, children, tittle,
     return (
         <>
             <LoadingOverlay isVisible={isLoading} />
-            <Head title={__('Portal') + ' - ' + pageTittle} />
+            <Head title={pageTittle} />
               <Navbar active={activePage ?? ''} />
               {children}
               <Footer />
