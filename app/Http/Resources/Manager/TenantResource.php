@@ -6,7 +6,7 @@ use App\Actions\General\EasyHashAction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TenancyResource extends JsonResource
+class TenantResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,7 +17,7 @@ class TenancyResource extends JsonResource
     {
         // By default, do not share sensitive subscription/payment fields
         $data = [
-            'id' => EasyHashAction::encode(valueToBeEncode: $this->id, type: 'tenancy-id'),
+            'id' => EasyHashAction::encode(valueToBeEncode: $this->id, type: 'tenant-id'),
             'name' => $this->name,
             'slug' => $this->slug,
             'status' => $this->status,

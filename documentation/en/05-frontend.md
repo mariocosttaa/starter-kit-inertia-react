@@ -202,6 +202,6 @@ resources/
 
 ## Next Steps
 - [Backend Development](06-backend.md)
-- [Multi-tenancy](03-multi-tenancy.md)
+- [Multi-tenant](03-multi-tenant.md)
 - [Testing](07-testing.md)
 - [Deployment](08-deployment.md) 

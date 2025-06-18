@@ -128,7 +128,7 @@ return new class extends Migration
         Schema::table('subscription_invoices', function (Blueprint $table) {
             $table->foreign('tenancy_id', 'subscription_invoices_tenancy_id_foreign')
                 ->references('id')
-                ->on('tenancys')
+                ->on('tenants')
                 ->onDelete('cascade');
 
             $table->foreign('payment_gateway_log_id', 'subscription_invoices_payment_gateway_log_id_foreign')
@@ -189,7 +189,7 @@ return new class extends Migration
 
             $table->foreign('tenancy_id', 'subscription_try_pay_tenancy_id_foreign')
                 ->references('id')
-                ->on('tenancys')
+                ->on('tenants')
                 ->onDelete('cascade');
 
             $table->foreign('subscription_id', 'subscription_try_pay_subscription_id_foreign')

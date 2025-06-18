@@ -126,7 +126,7 @@ npm run build:ssr
 ## Estrutura da Documentação
 - [Visão Geral do Sistema](01-visao-geral-do-sistema.md)
 - [Guia de Instalação](02-instalacao.md)
-- [Multi-tenancy](03-multi-tenancy.md)
+- [Multi-tenant](03-multi-tenant.md)
 - [Renderização do Lado do Servidor](04-ssr.md)
 - [Desenvolvimento Frontend](05-frontend.md)
 - [Desenvolvimento Backend](06-backend.md)
@@ -136,7 +136,7 @@ npm run build:ssr
 ## Próximos Passos
 - [Visão Geral do Sistema](01-visao-geral-do-sistema.md)
 - [Guia de Instalação](02-instalacao.md)
-- [Multi-tenancy](03-multi-tenancy.md)
+- [Multi-tenant](03-multi-tenant.md)
 - [Renderização do Lado do Servidor](04-ssr.md)
 - [Desenvolvimento Frontend](05-frontend.md)
 - [Desenvolvimento Backend](06-backend.md)

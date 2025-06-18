@@ -28,15 +28,13 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // user_tenancy
-        Schema::create('user_tenancy', function (Blueprint $table) {
+        // user_tenant
+        Schema::create('user_tenant', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->index()->name('user_tenancy_user_id_foreign');
-            $table->foreignId('tenancy_id')->constrained('tenancys')->onDelete('cascade')->index()->name('user_tenancy_tenancy_id_foreign');
-            $table->boolean('status')->default(true);
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->index()->name('user_tenant_user_id_foreign');
+            $table->foreignId('tenant_id')->constrained('tenants')->onDelete('cascade')->index()->name('user_tenant_tenant_id_foreign');
             $table->timestamps();
         });
-
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
@@ -60,7 +58,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('user_tenancy');
+        Schema::dropIfExists('user_tenant');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }

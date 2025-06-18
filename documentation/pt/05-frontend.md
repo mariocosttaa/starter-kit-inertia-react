@@ -202,6 +202,6 @@ resources/
 
 ## Próximos Passos
 - [Desenvolvimento Backend](06-backend.md)
-- [Multi-tenancy](03-multi-tenancy.md)
+- [Multi-tenant](03-multi-tenant.md)
 - [Testes](07-testes.md)
 - [Implantação](08-implantacao.md)

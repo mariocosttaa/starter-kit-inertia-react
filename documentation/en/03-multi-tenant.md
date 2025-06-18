@@ -1,6 +1,6 @@
-# Multi-tenancy Guide
+# Multi-tenant Guide
 
-[English](#multi-tenancy-guide) | [Português](../pt/03-multi-tenancy.md)
+[English](#multi-tenant-guide) | [Português](../pt/03-multi-tenant.md)
 
 ## Quick Navigation
 - [Overview](#overview)
@@ -12,12 +12,68 @@
 
 ## Overview
 
-Multi-tenancy in this application is implemented using a single database with tenant-specific table prefixes. This approach provides:
+This guide explains how multi-tenant functionality is implemented in the Laravel application.
 
-- Efficient data isolation
-- Easy tenant management
-- Scalable architecture
-- Simple backup and restore processes
+## Architecture
+
+Multi-tenant in this application is implemented using a single database with tenant-specific table prefixes. This approach provides:
+
+- **Isolation**: Each tenant's data is completely separated
+- **Scalability**: Easy to add new tenants
+- **Performance**: No complex routing or middleware overhead
+- **Simplicity**: Standard Laravel patterns and tools
+
+## Implementation Details
+
+### Database Structure
+
+Each tenant gets its own set of tables with a unique prefix based on the tenant ID.
+
+### Tenant Identification
+
+Tenants are identified through:
+- User authentication context
+- URL parameters
+- Subdomain routing (optional)
+
+### Data Isolation
+
+Data isolation is achieved through:
+- Table prefixing
+- Query scoping
+- Middleware enforcement
+
+## Usage
+
+### Creating a New Tenant
+
+```php
+// Create tenant
+$tenant = TenantModel::create([
+    'name' => 'New Tenant',
+    'slug' => 'new-tenant'
+]);
+
+// Create tenant database structure
+Artisan::call('make:tenantDb', ['tenantId' => $tenant->id]);
+```
+
+### Accessing Tenant Data
+
+```php
+// Set tenant context
+config(['tenantId' => $tenantId]);
+
+// Query tenant-specific data
+$data = TenantModel::where('id', $tenantId)->get();
+```
+
+## Best Practices
+
+- Always use tenant-aware queries
+- Implement proper tenant isolation
+- Use middleware for tenant context
+- Handle tenant-specific configurations
 
 ## Getting Started
 
@@ -91,26 +147,6 @@ Schema::create('tenant_' . $tenantId . '_table_name', function (Blueprint $table
 - Use the `TenantScope` trait in your models
 - Access tenant-specific data through the tenant context
 - Use the tenant middleware for automatic context switching
-
-## Best Practices
-
-### Data Isolation
-- Always use tenant-specific table prefixes
-- Implement proper access controls
-- Use middleware for tenant context
-- Validate tenant ownership
-
-### Performance
-- Index tenant-specific columns
-- Use appropriate caching strategies
-- Implement efficient queries
-- Monitor tenant resource usage
-
-### Security
-- Validate tenant access
-- Implement proper authentication
-- Use secure data encryption
-- Regular security audits
 
 ## Troubleshooting
 

@@ -1,6 +1,6 @@
-# Guia de Multi-tenancy
+# Guia de Multi-tenant
 
-[English](../en/03-multi-tenancy.md) | [Português](#guia-de-multi-tenancy)
+[English](../en/03-multi-tenant.md) | [Português](#guia-de-multi-tenant)
 
 ## Navegação Rápida
 - [Visão Geral](#visão-geral)
@@ -12,12 +12,68 @@
 
 ## Visão Geral
 
-A multi-tenancy nesta aplicação é implementada usando um único banco de dados com prefixos de tabela específicos para cada tenant. Esta abordagem oferece:
+Este guia explica como a funcionalidade multi-tenant é implementada na aplicação Laravel.
 
-- Isolamento eficiente de dados
-- Gerenciamento fácil de tenants
-- Arquitetura escalável
-- Processos simples de backup e restauração
+## Arquitetura
+
+A multi-tenant nesta aplicação é implementada usando um único banco de dados com prefixos de tabela específicos para cada tenant. Esta abordagem oferece:
+
+- **Isolamento**: Os dados de cada tenant são completamente separados
+- **Escalabilidade**: Fácil adição de novos tenants
+- **Performance**: Sem sobrecarga complexa de roteamento ou middleware
+- **Simplicidade**: Padrões e ferramentas padrão do Laravel
+
+## Detalhes da Implementação
+
+### Estrutura do Banco de Dados
+
+Cada tenant recebe seu próprio conjunto de tabelas com um prefixo único baseado no ID do tenant.
+
+### Identificação do Tenant
+
+Os tenants são identificados através de:
+- Contexto de autenticação do usuário
+- Parâmetros da URL
+- Roteamento de subdomínio (opcional)
+
+### Isolamento de Dados
+
+O isolamento de dados é alcançado através de:
+- Prefixação de tabelas
+- Escopo de consultas
+- Aplicação de middleware
+
+## Uso
+
+### Criando um Novo Tenant
+
+```php
+// Criar tenant
+$tenant = TenantModel::create([
+    'name' => 'Novo Tenant',
+    'slug' => 'novo-tenant'
+]);
+
+// Criar estrutura do banco do tenant
+Artisan::call('make:tenantDb', ['tenantId' => $tenant->id]);
+```
+
+### Acessando Dados do Tenant
+
+```php
+// Definir contexto do tenant
+config(['tenantId' => $tenantId]);
+
+// Consultar dados específicos do tenant
+$data = TenantModel::where('id', $tenantId)->get();
+```
+
+## Melhores Práticas
+
+- Sempre use consultas conscientes do tenant
+- Implemente isolamento adequado do tenant
+- Use middleware para contexto do tenant
+- Gerencie configurações específicas do tenant
 
 ## Primeiros Passos
 
@@ -91,26 +147,6 @@ Schema::create('tenant_' . $tenantId . '_nome_tabela', function (Blueprint $tabl
 - Use o trait `TenantScope` nos seus modelos
 - Acesse dados específicos do tenant através do contexto
 - Use o middleware do tenant para troca automática de contexto
-
-## Melhores Práticas
-
-### Isolamento de Dados
-- Sempre use prefixos de tabela específicos do tenant
-- Implemente controles de acesso adequados
-- Use middleware para contexto do tenant
-- Valide a propriedade do tenant
-
-### Performance
-- Indexe colunas específicas do tenant
-- Use estratégias de cache apropriadas
-- Implemente consultas eficientes
-- Monitore o uso de recursos do tenant
-
-### Segurança
-- Valide o acesso do tenant
-- Implemente autenticação adequada
-- Use criptografia segura de dados
-- Realize auditorias de segurança regulares
 
 ## Solução de Problemas
 

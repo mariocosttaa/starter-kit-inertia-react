@@ -106,6 +106,6 @@ A custom caching system provides efficient data storage and retrieval.
 ## Related Documentation
 
 - [Frontend Development](05-frontend.md)
-- [Multi-tenancy](03-multi-tenancy.md)
+- [Multi-tenant](03-multi-tenant.md)
 - [Testing](07-testing.md)
 - [Deployment](08-deployment.md) 

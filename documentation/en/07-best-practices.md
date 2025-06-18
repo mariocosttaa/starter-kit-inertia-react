@@ -18,5 +18,5 @@
 - [Backend Development](06-backend.md)
 - [System Overview](01-system-overview.md)
 - [Installation Guide](02-installation.md)
-- [Multi-tenancy](03-multi-tenancy.md)
+- [Multi-tenant](03-multi-tenant.md)
 - [SSR Guide](04-ssr.md) 

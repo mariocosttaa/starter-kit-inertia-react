@@ -77,7 +77,7 @@ npm run build:ssr
 ## Documentation Structure
 - [System Overview](01-system-overview.md)
 - [Installation Guide](02-installation.md)
-- [Multi-tenancy](03-multi-tenancy.md)
+- [Multi-tenant](03-multi-tenant.md)
 - [Server-Side Rendering](04-ssr.md)
 - [Frontend Development](05-frontend.md)
 - [Backend Development](06-backend.md)
@@ -86,7 +86,7 @@ npm run build:ssr
 ## Next Steps
 - [System Overview](01-system-overview.md)
 - [Installation Guide](02-installation.md)
-- [Multi-tenancy](03-multi-tenancy.md)
+- [Multi-tenant](03-multi-tenant.md)
 - [Server-Side Rendering](04-ssr.md)
 - [Frontend Development](05-frontend.md)
 - [Backend Development](06-backend.md)

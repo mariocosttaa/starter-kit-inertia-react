@@ -3,10 +3,10 @@
 namespace App\Http\Webhooks\PaymentGateway\Stripe\Manager\Events;
 
 use App\Actions\General\EasyHashAction;
-use App\Actions\Tenancy\TenancyAction;
+use App\Actions\Tenant\TenantAction;
 use App\Models\Manager\SubscriptionInvoiceModel;
 use App\Models\Manager\SubscriptionModel;
-use App\Models\Manager\TenancyModel;
+use App\Models\Manager\TenantModel;
 use Illuminate\Support\Facades\Log;
 use Stripe\Event as StripeEvent;
 
@@ -75,10 +75,10 @@ class StripeInvoicePaymentSucceeded
         //if are first invoice, create invoice as paid
         if($metadata->set_first_invoice === 'true' || $metadata->set_first_invoice === true) {
 
-            //Set Tenancy
-            $tenancy = TenancyAction::set(
+            //Set Tenant
+            $tenant = TenantAction::set(
                 userId: $metadata->user_id,
-                tenancyModelData: [
+                tenantModelData: [
                     'subscription_id' => $subscription->id,
                     'subscription_price_id' => $subscriptionPrice->id,
                     'payment_date' => date('Y-m-d H:i:s', $event->data->object->status_transitions->paid_at),
@@ -89,7 +89,7 @@ class StripeInvoicePaymentSucceeded
 
             // Create invoice in Subscription Invoices
             SubscriptionInvoiceModel::create([
-                'tenancy_id' => $tenancy->id,
+                'tenant_id' => $tenant->id,
                 'subscription_id' => $subscription->id,
                 'subscription_price_id' => $subscriptionPrice->id,
                 'price' => $amount, // Store as cents (e.g., 6999)
@@ -109,15 +109,15 @@ class StripeInvoicePaymentSucceeded
         } else {
             //if not edit invoice, and set paid..
 
-            // Check if metadata contains tenancy_id
-            if (!isset($metadata->tenancy_id)) {
-                Log::error('Stripe Invoice Created Event - Missing tenancy ID in metadata');
+            // Check if metadata contains tenant_id
+            if (!isset($metadata->tenant_id)) {
+                Log::error('Stripe Invoice Created Event - Missing tenant ID in metadata');
                 return;
             }
 
-            $tenancyId = EasyHashAction::decode($metadata->tenancy_id, 'payment-gateway-tenancy-id');
-            if (TenancyModel::where('id', $tenancyId)->doesntExist()) {
-                Log::error('Stripe Invoice Created Event - Tenancy not found for ID: ' . $tenancyId);
+            $tenantId = EasyHashAction::decode($metadata->tenant_id, 'payment-gateway-tenant-id');
+            if (TenantModel::where('id', $tenantId)->doesntExist()) {
+                Log::error('Stripe Invoice Created Event - Tenant not found for ID: ' . $tenantId);
                 return;
             }
 
@@ -125,7 +125,7 @@ class StripeInvoicePaymentSucceeded
 
             // Create invoice in Subscription Invoices
             SubscriptionInvoiceModel::find($invoice_local_id)->update([
-                'tenancy_id' => $tenancyId,
+                'tenant_id' => $tenantId,
                 'subscription_id' => $subscription->id,
                 'subscription_price_id' => $subscriptionPrice->id,
                 'price' => $amount, // Store as cents (e.g., 6999)

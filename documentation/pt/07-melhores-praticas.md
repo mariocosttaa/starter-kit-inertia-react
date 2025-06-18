@@ -258,5 +258,5 @@ switch ($event->type) {
 - [Desenvolvimento Backend](06-backend.md)
 - [Visão Geral do Sistema](01-visao-geral-do-sistema.md)
 - [Guia de Instalação](02-instalacao.md)
-- [Multi-tenancy](03-multi-tenancy.md)
+- [Multi-tenant](03-multi-tenant.md)
 - [Guia SSR](04-ssr.md) 

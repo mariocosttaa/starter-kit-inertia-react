@@ -59,7 +59,7 @@ The system uses a multi-database architecture with two main databases:
 - Stores currency codes and exchange rates
 - Includes fields for currency details
 
-### Tenancies Table
+### Tenants Table
 - Manages tenant information
 - Tracks tenant status and configuration
 - Includes fields for tenant details and settings
@@ -80,7 +80,7 @@ The system uses a multi-database architecture with two main databases:
 
 ### User Relationships
 - Users -> Subscriptions (One-to-Many)
-- Users -> Tenancies (Many-to-Many)
+- Users -> Tenants (Many-to-Many)
 - Users -> Settings (One-to-Many)
 
 ### Subscription Relationships
@@ -88,8 +88,8 @@ The system uses a multi-database architecture with two main databases:
 - Subscriptions -> Users (Many-to-One)
 
 ### Tenancy Relationships
-- Tenancies -> Users (Many-to-Many)
-- Tenancies -> Settings (One-to-Many)
+- Tenants -> Users (Many-to-Many)
+- Tenants -> Settings (One-to-Many)
 
 ## Indexes and Constraints
 

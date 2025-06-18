@@ -9,7 +9,7 @@ class GatewayManager implements PaymentGatewayInterface
 {
     public function __construct(
         public bool $managerConection = false,
-        public bool $tenancyConection = true,
+        public bool $tenantConection = true,
         public ?string $gatewaySlug = null
     ) {
         // Define o gateway padrão como 'stripe' se nenhum for especificado
@@ -22,32 +22,32 @@ class GatewayManager implements PaymentGatewayInterface
     public function getKeys(): ?object
     {
         return match ($this->gatewaySlug) {
-            'stripe' => (new StripeGateway($this->managerConection, $this->tenancyConection))->getKeys(),
-            default => (new StripeGateway($this->managerConection, $this->tenancyConection))->getKeys(),
+            'stripe' => (new StripeGateway($this->managerConection, $this->tenantConection))->getKeys(),
+            default => (new StripeGateway($this->managerConection, $this->tenantConection))->getKeys(),
         };
     }
 
     public function tryConnect(): bool
     {
         return match ($this->gatewaySlug) {
-            'stripe' => (new StripeGateway($this->managerConection, $this->tenancyConection))->tryConnect(),
-            default => (new StripeGateway($this->managerConection, $this->tenancyConection))->tryConnect(),
+            'stripe' => (new StripeGateway($this->managerConection, $this->tenantConection))->tryConnect(),
+            default => (new StripeGateway($this->managerConection, $this->tenantConection))->tryConnect(),
         };
     }
 
     public function createWebHooks(array|string|null $events = null, ?string $url = null, ?array $metadata = null): string
     {
         return match ($this->gatewaySlug) {
-            'stripe' => (new StripeGateway($this->managerConection, $this->tenancyConection))->createWebHooks($events, $url, $metadata),
-            default => (new StripeGateway($this->managerConection, $this->tenancyConection))->createWebHooks($events, $url, $metadata),
+            'stripe' => (new StripeGateway($this->managerConection, $this->tenantConection))->createWebHooks($events, $url, $metadata),
+            default => (new StripeGateway($this->managerConection, $this->tenantConection))->createWebHooks($events, $url, $metadata),
         };
     }
 
     public function createPayment(int $amount, string $currency, ?array $paymentMethod = null, ?array $metadata = null): array
     {
         return match ($this->gatewaySlug) {
-            'stripe' => (new StripeGateway($this->managerConection, $this->tenancyConection))->createPayment($amount, $currency, $paymentMethod, $metadata),
-            default => (new StripeGateway($this->managerConection, $this->tenancyConection))->createPayment($amount, $currency, $paymentMethod, $metadata),
+            'stripe' => (new StripeGateway($this->managerConection, $this->tenantConection))->createPayment($amount, $currency, $paymentMethod, $metadata),
+            default => (new StripeGateway($this->managerConection, $this->tenantConection))->createPayment($amount, $currency, $paymentMethod, $metadata),
         };
     }
 
@@ -55,8 +55,8 @@ class GatewayManager implements PaymentGatewayInterface
     {
 
         return match ($this->gatewaySlug) {
-            'stripe' => (new StripeGateway($this->managerConection, $this->tenancyConection))->startCustomerSubscriptionSession($localProductId, $localProductPrice, $customerEmail, $routeSuccess, $routeCancel, $userId, $metadata),
-             default => (new StripeGateway($this->managerConection, $this->tenancyConection))->startCustomerSubscriptionSession($localProductId, $localProductPrice, $customerEmail, $routeSuccess, $routeCancel, $userId, $metadata)
+            'stripe' => (new StripeGateway($this->managerConection, $this->tenantConection))->startCustomerSubscriptionSession($localProductId, $localProductPrice, $customerEmail, $routeSuccess, $routeCancel, $userId, $metadata),
+             default => (new StripeGateway($this->managerConection, $this->tenantConection))->startCustomerSubscriptionSession($localProductId, $localProductPrice, $customerEmail, $routeSuccess, $routeCancel, $userId, $metadata)
         };
 
     }
@@ -64,32 +64,32 @@ class GatewayManager implements PaymentGatewayInterface
     public function deleteSubscription(string $subscriptionId): bool
     {
         return match ($this->gatewaySlug) {
-            'stripe' => (new StripeGateway($this->managerConection, $this->tenancyConection))->deleteSubscription($subscriptionId),
-            default => (new StripeGateway($this->managerConection, $this->tenancyConection))->deleteSubscription($subscriptionId),
+            'stripe' => (new StripeGateway($this->managerConection, $this->tenantConection))->deleteSubscription($subscriptionId),
+            default => (new StripeGateway($this->managerConection, $this->tenantConection))->deleteSubscription($subscriptionId),
         };
     }
 
     public function cancelCustomerSubscription(string $subscriptionId): bool
     {
         return match ($this->gatewaySlug) {
-            'stripe' => (new StripeGateway($this->managerConection, $this->tenancyConection))->cancelCustomerSubscription($subscriptionId),
-            default => (new StripeGateway($this->managerConection, $this->tenancyConection))->cancelCustomerSubscription($subscriptionId),
+            'stripe' => (new StripeGateway($this->managerConection, $this->tenantConection))->cancelCustomerSubscription($subscriptionId),
+            default => (new StripeGateway($this->managerConection, $this->tenantConection))->cancelCustomerSubscription($subscriptionId),
         };
     }
 
     public function updateSubscriptionNextPaymentDate(string $subscriptionId, int $newTimestamp): bool
     {
         return match ($this->gatewaySlug) {
-            'stripe' => (new StripeGateway($this->managerConection, $this->tenancyConection))->updateSubscriptionNextPaymentDate($subscriptionId, $newTimestamp),
-            default => (new StripeGateway($this->managerConection, $this->tenancyConection))->updateSubscriptionNextPaymentDate($subscriptionId, $newTimestamp),
+            'stripe' => (new StripeGateway($this->managerConection, $this->tenantConection))->updateSubscriptionNextPaymentDate($subscriptionId, $newTimestamp),
+            default => (new StripeGateway($this->managerConection, $this->tenantConection))->updateSubscriptionNextPaymentDate($subscriptionId, $newTimestamp),
         };
     }
 
     public function createProduct(int $localProductId, string $name, ?array $images = null, ?array $metadata = null): string
     {
         return match ($this->gatewaySlug) {
-            'stripe' => (new StripeGateway($this->managerConection, $this->tenancyConection))->createProduct($localProductId, $name, $images, $metadata),
-            default => (new StripeGateway($this->managerConection, $this->tenancyConection))->createProduct($localProductId, $name, $images, $metadata),
+            'stripe' => (new StripeGateway($this->managerConection, $this->tenantConection))->createProduct($localProductId, $name, $images, $metadata),
+            default => (new StripeGateway($this->managerConection, $this->tenantConection))->createProduct($localProductId, $name, $images, $metadata),
         };
     }
 
@@ -105,7 +105,7 @@ class GatewayManager implements PaymentGatewayInterface
     ): string
     {
         return match ($this->gatewaySlug) {
-            'stripe' => (new StripeGateway($this->managerConection, $this->tenancyConection))->createPrice(
+            'stripe' => (new StripeGateway($this->managerConection, $this->tenantConection))->createPrice(
                 $localProductId,
                 $localPriceId,
                 $amount,
@@ -114,7 +114,7 @@ class GatewayManager implements PaymentGatewayInterface
                 $intervalCount,
                 $metadata
             ),
-            default => (new StripeGateway($this->managerConection, $this->tenancyConection))->createPrice(
+            default => (new StripeGateway($this->managerConection, $this->tenantConection))->createPrice(
                 $localProductId,
                 $localPriceId,
                 $amount,

@@ -34,7 +34,7 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Database\\Migrations\\Tenancy\\": "database/migrations/tenancy/"
+            "Database\\Migrations\\Tenant\\": "database/migrations/tenant/"
         }
     },
     "autoload-dev": {

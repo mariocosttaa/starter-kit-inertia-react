@@ -3,14 +3,14 @@
 ## 📋 Índice
 - [Visão Geral](#visão-geral)
 - [Banco de Dados do Manager](#banco-de-dados-do-manager)
-- [Banco de Dados do Tenancy](#banco-de-dados-do-tenancy)
+- [Banco de Dados do Tenant](#banco-de-dados-do-tenant)
 - [Relacionamentos](#relacionamentos)
 - [Índices e Restrições](#índices-e-restrições)
 
 ## Visão Geral
 O sistema utiliza uma arquitetura multi-banco de dados com dois bancos principais:
 1. Banco de Dados do Manager: Gerencia operações do sistema
-2. Banco de Dados do Tenancy: Gerencia dados específicos dos tenants
+2. Banco de Dados do Tenant: Gerencia dados específicos dos tenants
 
 ## Banco de Dados do Manager
 
@@ -59,7 +59,7 @@ O sistema utiliza uma arquitetura multi-banco de dados com dois bancos principai
 - Armazena códigos e taxas de câmbio
 - Inclui campos para detalhes da moeda
 
-### Tabela de Tenancies
+### Tabela de Tenants
 - Gerencia informações dos tenants
 - Controla status e configuração dos tenants
 - Inclui campos para detalhes e configurações
@@ -69,7 +69,7 @@ O sistema utiliza uma arquitetura multi-banco de dados com dois bancos principai
 - Armazena metadados e status dos emails
 - Inclui campos para destinatário e conteúdo
 
-## Banco de Dados do Tenancy
+## Banco de Dados do Tenant
 
 ### Tabela de Notificações
 - Gerencia notificações específicas do tenant
@@ -80,16 +80,16 @@ O sistema utiliza uma arquitetura multi-banco de dados com dois bancos principai
 
 ### Relacionamentos de Usuário
 - Usuários -> Assinaturas (Um-para-Muitos)
-- Usuários -> Tenancies (Muitos-para-Muitos)
+- Usuários -> Tenants (Muitos-para-Muitos)
 - Usuários -> Configurações (Um-para-Muitos)
 
 ### Relacionamentos de Assinatura
 - Assinaturas -> Gateway de Pagamento (Muitos-para-Um)
 - Assinaturas -> Usuários (Muitos-para-Um)
 
-### Relacionamentos de Tenancy
-- Tenancies -> Usuários (Muitos-para-Muitos)
-- Tenancies -> Configurações (Um-para-Muitos)
+### Relacionamentos de Tenant
+- Tenants -> Usuários (Muitos-para-Muitos)
+- Tenants -> Configurações (Um-para-Muitos)
 
 ## Índices e Restrições
 

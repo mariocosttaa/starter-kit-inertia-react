@@ -106,6 +106,6 @@ Um sistema de cache personalizado fornece armazenamento e recuperação eficient
 ## Documentação Relacionada
 
 - [Desenvolvimento Frontend](05-frontend.md)
-- [Multi-tenancy](03-multi-tenancy.md)
+- [Multi-tenant](03-multi-tenant.md)
 - [Testes](07-testes.md)
 - [Implantação](08-implantacao.md) 

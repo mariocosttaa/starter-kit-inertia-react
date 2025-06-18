@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateNotificationTableExample extends _TenancyHelperMigration
 {
-    protected $connection = 'tenancies';
+    protected $connection = 'tenants';
 
     /**
      * Run the migrations.

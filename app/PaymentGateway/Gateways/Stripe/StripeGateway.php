@@ -23,10 +23,10 @@ class StripeGateway extends PaymentGatewayHelper implements PaymentGatewayInterf
     protected string $secretKey;
     protected string $gatewaySlug = 'stripe';
 
-    public function __construct(public ?bool $managerConection = false, public ?bool $tenancyConection = true)
+    public function __construct(public ?bool $managerConection = false, public ?bool $tenantConection = true)
     {
         $this->managerConection = $managerConection;
-        $this->tenancyConection = $tenancyConection;
+        $this->tenantConection = $tenantConection;
         $stripeKeys = $this->getKeys();
         Stripe::setApiKey($stripeKeys->secret_key);
     }
@@ -39,8 +39,8 @@ class StripeGateway extends PaymentGatewayHelper implements PaymentGatewayInterf
             $this->publicKey = env('PAYMENT_GATEWAY_STRIPE_PUBLIC_KEY');
             $this->secretKey = env('PAYMENT_GATEWAY_STRIPE_SECRET_KEY');
 
-        } elseif ($this->tenancyConection) {
-            throw new Exception('PaymentGateway Tenancy Stripe, ApiKeys not Found');
+        } elseif ($this->tenantConection) {
+            throw new Exception('PaymentGateway Tenant Stripe, ApiKeys not Found');
         } else {
             throw new Exception('PaymentGateway Manager Stripe, Connection Type Undefined');
         }
@@ -73,8 +73,8 @@ class StripeGateway extends PaymentGatewayHelper implements PaymentGatewayInterf
         if ($this->managerConection) {
             $url = $url ?? route("payment-gateway-webhook-manager-{$this->gatewaySlug}");
 
-        } elseif ($this->tenancyConection) {
-            throw new Exception('PaymentGateway Tenancy Stripe, WebHook Url Not Configurated not Found');
+        } elseif ($this->tenantConection) {
+            throw new Exception('PaymentGateway Tenant Stripe, WebHook Url Not Configurated not Found');
         } else {
             throw new Exception('PaymentGateway Stripe, Connection and WebHook Url Not Configurated not Found');
         }

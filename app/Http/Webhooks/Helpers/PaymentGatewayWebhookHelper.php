@@ -10,7 +10,7 @@ use Exception;
 abstract class PaymentGatewayWebhookHelper
 {
     protected ?bool $managerConection;
-    protected ?bool $tenancyConnection;
+    protected ?bool $tenantConnection;
     protected string $gatewaySlug;
     protected string $cacheTag = 'payment-gateway-logs-helper-abstract';
     protected int $cacheDuration = 84000;

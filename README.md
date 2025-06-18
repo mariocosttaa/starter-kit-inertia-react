@@ -1,11 +1,11 @@
 # 🚀 Laravel Inertia React TypeScript SaaS Starter Kit
 
-A modern SaaS starter kit built with Laravel, React, TypeScript, and Inertia.js. This starter kit provides a robust foundation for building scalable and maintainable SaaS applications with advanced features like Server-Side Rendering (SSR) and Multi-tenancy support.
+A modern SaaS starter kit built with Laravel, React, TypeScript, and Inertia.js. This starter kit provides a robust foundation for building scalable and maintainable SaaS applications with advanced features like Server-Side Rendering (SSR) and Multi-tenant support.
 
 ## ✨ Key Features
 
 * 🔐 Authentication & Authorization
-* 👥 Multi-tenancy Support
+* 👥 Multi-tenant Support
 * 🎨 Modern UI with Tailwind CSS
 * 📱 Responsive Design
 * 🔄 Real-time Updates
@@ -60,7 +60,7 @@ A modern SaaS starter kit built with Laravel, React, TypeScript, and Inertia.js.
 ### English
 1. [System Overview](documentation/en/01-system-overview.md)
 2. [Installation Guide](documentation/en/02-installation.md)
-3. [Multi-tenancy](documentation/en/03-multi-tenancy.md)
+3. [Multi-tenant](documentation/en/03-multi-tenant.md)
 4. [Server-Side Rendering](documentation/en/04-ssr.md)
 5. [Frontend Development](documentation/en/05-frontend.md)
 6. [Backend Development](documentation/en/06-backend.md)
@@ -69,7 +69,7 @@ A modern SaaS starter kit built with Laravel, React, TypeScript, and Inertia.js.
 ### Português
 1. [Visão Geral do Sistema](documentation/pt/01-visao-geral-do-sistema.md)
 2. [Guia de Instalação](documentation/pt/02-instalacao.md)
-3. [Multi-tenancy](documentation/pt/03-multi-tenancy.md)
+3. [Multi-tenant](documentation/pt/03-multi-tenant.md)
 4. [Renderização do Lado do Servidor](documentation/pt/04-ssr.md)
 5. [Desenvolvimento Frontend](documentation/pt/05-frontend.md)
 6. [Desenvolvimento Backend](documentation/pt/06-backend.md)

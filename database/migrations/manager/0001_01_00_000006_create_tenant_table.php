@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id()->startingValue(10000);
             $table->string('name');
             $table->string('slug')->unique()->index();
-            $table->foreignId('subscription_id')->constrained('subscriptions')->onDelete('cascade')->name('tenancys_subscription_id_foreign');
-            $table->foreignId('subscription_price_id')->constrained('subscription_prices')->onDelete('cascade')->name('tenancys_subscription_price_id_foreign');
+            $table->foreignId('subscription_id')->constrained('subscriptions')->onDelete('cascade')->name('tenants_subscription_id_foreign');
+            $table->foreignId('subscription_price_id')->constrained('subscription_prices')->onDelete('cascade')->name('tenants_subscription_price_id_foreign');
             $table->datetime('payment_date')->nullable();
             $table->datetime('expiration_date')->nullable();
 
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tenancys');
+        Schema::dropIfExists('tenants');
     }
 };

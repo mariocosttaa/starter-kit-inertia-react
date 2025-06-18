@@ -5,6 +5,7 @@ namespace App\Models\Manager;
 use App\Models\Helpers\ManagerModelHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SubscriptionTryPayModel extends ManagerModelHelper
 {
@@ -14,7 +15,7 @@ class SubscriptionTryPayModel extends ManagerModelHelper
 
     protected $fillable = [
         'user_id',
-        'tenancy_id',
+        'tenant_id',
         'subscription_id',
         'subscription_price_id',
         'price',
@@ -35,7 +36,7 @@ class SubscriptionTryPayModel extends ManagerModelHelper
 
     protected $casts = [
         'user_id' => 'integer',
-        'tenancy_id' => 'integer',
+        'tenant_id' => 'integer',
         'subscription_id' => 'integer',
         'subscription_price_id' => 'integer',
         'price' => 'integer',
@@ -51,9 +52,9 @@ class SubscriptionTryPayModel extends ManagerModelHelper
     {
         return $this->belongsTo(UserModel::class, 'user_id');
     }
-    public function tenancy()
+    public function tenant(): BelongsTo
     {
-        return $this->belongsTo(TenancyModel::class, 'tenancy_id');
+        return $this->belongsTo(TenantModel::class, 'tenant_id');
     }
     public function subscription()
     {

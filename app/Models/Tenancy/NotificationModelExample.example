@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Models\Tenancy;
+namespace App\Models\Tenant;
 
 use App\Models\Manager\UserModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class NotificationModelExample extends _TenancyModelHelper
+class NotificationModelExample extends _TenantModelHelper
 {
     use HasFactory;
 
-    protected $connection = 'tenancies';
+    protected $connection = 'tenants';
     protected $table = 'notifications_example';
     protected $baseTable = 'notifications_example';
 
