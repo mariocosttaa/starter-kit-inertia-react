@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tenant', function (Blueprint $table) {
+        Schema::create('tenants', function (Blueprint $table) {
             $table->id()->startingValue(10000);
             $table->string('name');
             $table->string('slug')->unique()->index();
